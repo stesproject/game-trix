@@ -1,25 +1,29 @@
 import React, { FC, useEffect } from 'react';
-import {StyledButton} from './Header.style';
-import { doc, getDoc } from "firebase/firestore";
-import { usersCol } from '../../hooks/useDb';
+// import {StyledButton} from './Header.style';
+import { doc, getDoc, getDocs } from "firebase/firestore";
+import { storiesCol, usersCol } from '../../hooks/useDb';
 
 interface HeaderProps {}
 
 const Header: FC<HeaderProps> = () => {
   useEffect(() => {
-    readDocument();
+    getStories();
+    getUser();
   }, [])
   
-  const readDocument = async () => {
-    const docRef = doc(usersCol);
-    const docSnap = await getDoc(docRef);
-    
-    if (docSnap.exists()) {
-      console.log("Document data:", docSnap.data());
-    } else {
-      // doc.data() will be undefined in this case
-      console.log("No such document!");
-    }
+  const getUser = async () => {
+    const userDocRef = doc(usersCol, 'UbKALntuhX0OOjJysjG0')
+    const userDocSnap = await getDoc(userDocRef);
+    const user = userDocSnap.data();
+    console.log(user?.username);
+  }
+
+  const getStories = async () => {
+    const storiesDocs = await getDocs(storiesCol)
+    storiesDocs.docs.forEach((storyDoc) => {
+      const story = storyDoc.data()
+      console.log(story.title)
+    })
   }
 
   return (

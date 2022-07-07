@@ -1,9 +1,11 @@
 // Get the imports
 import { initializeApp } from "firebase/app";
 import { getFirestore, CollectionReference, collection, DocumentData } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
+// import { getAnalytics } from "firebase/analytics";
+
 // Import all your model types
-import { User } from "../types/user";
+import { User } from "../types/user.type";
+import { Story } from "../types/story.type";
 
 // Init the firebase app
 export const firebaseApp = initializeApp({
@@ -18,7 +20,7 @@ export const firebaseApp = initializeApp({
 
 // Export firestore incase we need to access it directly
 export const firestore = getFirestore();
-const analytics = getAnalytics(firebaseApp);
+// const analytics = getAnalytics(firebaseApp);
 
 // This is just a helper to add the type to the db responses
 const createCollection = <T = DocumentData>(collectionName: string) => {
@@ -27,3 +29,4 @@ const createCollection = <T = DocumentData>(collectionName: string) => {
 
 // export all your collections
 export const usersCol = createCollection<User>("users");
+export const storiesCol = createCollection<Story>("stories");
