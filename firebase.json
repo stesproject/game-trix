@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "game-trix",
     "public": "build",
     "ignore": [
       "firebase.json",
