@@ -22,7 +22,7 @@ const Header: FC<HeaderProps> = () => {
     const storiesDocs = await getDocs(storiesCol)
     storiesDocs.docs.forEach((storyDoc) => {
       const story = storyDoc.data()
-      console.log(story.title)
+      console.log(story.chapters)
     })
   }
 
